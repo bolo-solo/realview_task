@@ -9,7 +9,7 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) => MaterialApp.router(
     routerConfig: appRouter,
     title: 'Flutter Demo',
-    //todo wrap with responsivnesss/theme if time will allow
+    //todo wrap with responsiveness/theme if time will allow
     builder: (context, child) => child!,
     debugShowCheckedModeBanner: false,
   );

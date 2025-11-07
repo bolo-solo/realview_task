@@ -17,33 +17,39 @@ class AuthorsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) => AuthorsViewProvider(
     child: BlocBuilder<AuthorsViewBloc, AuthorsViewState>(
-      builder: (context, state) => Column(
-        children: [
-          AuthorsSearchInput(
-            onSearch: (query) {
-              context.read<AuthorsViewBloc>().add(
-                AuthorsViewEvent.queryChanged(query),
-              );
-            },
-            initialValue: NameConsts.initialInputValue,
-          ),
-          Expanded(
-            child: state.when(
-              initial: () => const Center(child: Text('Initial State')),
-              loading: () => const Center(child: CircularProgressIndicator()),
-              loaded: (authors, query) => ListView.builder(
-                itemCount: authors.length,
-                itemBuilder: (context, index) => AuthorsListItem(
-                  author: authors[index],
-                  onClick: () {
-                    context.push(AppRoutes.authorDetails.path);
-                  },
-                ),
+      builder: (context, state) => SafeArea(bottom: false,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              child: AuthorsSearchInput(
+                onSearch: (query) {
+                  context.read<AuthorsViewBloc>().add(
+                    AuthorsViewEvent.queryChanged(query),
+                  );
+                },
+                initialValue: NameConsts.initialInputValue,
               ),
-              loadingError: (message) => Center(child: Text('Error: $message')),
             ),
-          ),
-        ],
+            Expanded(
+              child: state.when(
+                initial: () => const Center(child: Text('Initial State')),
+                loading: () => const Center(child: CircularProgressIndicator()),
+                loaded: (authors, query) => ListView.builder(
+                  itemCount: authors.length,
+                  itemBuilder: (context, index) => AuthorsListItem(
+                    author: authors[index],
+                    onClick: () {
+                      context.push(AppRoutes.authorDetails.path);
+                    },
+                  ),
+                ),
+                loadingError: (message) =>
+                    Center(child: Text('Error: $message')),
+              ),
+            ),
+          ],
+        ),
       ),
     ),
   );
