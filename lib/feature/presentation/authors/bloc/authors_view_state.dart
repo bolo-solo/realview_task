@@ -15,5 +15,5 @@ sealed class AuthorsViewState with _$AuthorsViewState {
   const factory AuthorsViewState.loaded(List<Author> authors, String query) =
       Loaded;
 
-  const factory AuthorsViewState.error(String message) = Error;
+  const factory AuthorsViewState.loadingError(String message) = LoadingError;
 }

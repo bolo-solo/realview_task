@@ -48,8 +48,6 @@ app.*.map.json
 # iOS related
 **/ios/Runner.xcworkspace/
 
-# Web related
-/web/
 
 # Windows related
 windows/flutter/generated_plugin_registrant.cc

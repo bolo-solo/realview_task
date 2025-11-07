@@ -1,6 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../../../core/consts/name_consts.dart';
 import '../../../domain/usecases/get_authors_by_query.dart';
 import 'authors_view_event.dart';
 import 'authors_view_state.dart';
@@ -11,18 +12,10 @@ class AuthorsViewBloc extends Bloc<AuthorsViewEvent, AuthorsViewState> {
     : _getAuthorsByQuery = getAuthorsByQuery,
       super(const AuthorsViewState.initial()) {
     on<Init>((event, emit) async {
-      await _searchAuthors(emit, 'Flutter');
+      await _searchAuthors(emit, NameConsts.initialInputValue);
     });
     on<QueryChanged>((event, emit) async {
       await _searchAuthors(emit, event.query);
-    });
-    on<Refresh>((event, emit) async {
-      final query = state.maybeWhen(
-        loaded: (authors, query) => query,
-        orElse: () => '',
-      );
-
-      await _searchAuthors(emit, query);
     });
   }
   final GetAuthorsByQuery _getAuthorsByQuery;
@@ -40,7 +33,7 @@ class AuthorsViewBloc extends Bloc<AuthorsViewEvent, AuthorsViewState> {
 
     withResult.when(
       (authors) => emit(AuthorsViewState.loaded(authors, query)),
-      (error) => emit(AuthorsViewState.error(error.toString())),
+      (error) => emit(AuthorsViewState.loadingError(error.toString())),
     );
   }
 }

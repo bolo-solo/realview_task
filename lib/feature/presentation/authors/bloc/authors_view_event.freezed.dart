@@ -55,13 +55,12 @@ extension AuthorsViewEventPatterns on AuthorsViewEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Init value)?  init,TResult Function( QueryChanged value)?  queryChanged,TResult Function( Refresh value)?  refresh,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Init value)?  init,TResult Function( QueryChanged value)?  queryChanged,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case Init() when init != null:
 return init(_that);case QueryChanged() when queryChanged != null:
-return queryChanged(_that);case Refresh() when refresh != null:
-return refresh(_that);case _:
+return queryChanged(_that);case _:
   return orElse();
 
 }
@@ -79,13 +78,12 @@ return refresh(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Init value)  init,required TResult Function( QueryChanged value)  queryChanged,required TResult Function( Refresh value)  refresh,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Init value)  init,required TResult Function( QueryChanged value)  queryChanged,}){
 final _that = this;
 switch (_that) {
 case Init():
 return init(_that);case QueryChanged():
-return queryChanged(_that);case Refresh():
-return refresh(_that);}
+return queryChanged(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -99,13 +97,12 @@ return refresh(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Init value)?  init,TResult? Function( QueryChanged value)?  queryChanged,TResult? Function( Refresh value)?  refresh,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Init value)?  init,TResult? Function( QueryChanged value)?  queryChanged,}){
 final _that = this;
 switch (_that) {
 case Init() when init != null:
 return init(_that);case QueryChanged() when queryChanged != null:
-return queryChanged(_that);case Refresh() when refresh != null:
-return refresh(_that);case _:
+return queryChanged(_that);case _:
   return null;
 
 }
@@ -122,12 +119,11 @@ return refresh(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( String query)?  queryChanged,TResult Function()?  refresh,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  init,TResult Function( String query)?  queryChanged,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case Init() when init != null:
 return init();case QueryChanged() when queryChanged != null:
-return queryChanged(_that.query);case Refresh() when refresh != null:
-return refresh();case _:
+return queryChanged(_that.query);case _:
   return orElse();
 
 }
@@ -145,12 +141,11 @@ return refresh();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( String query)  queryChanged,required TResult Function()  refresh,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  init,required TResult Function( String query)  queryChanged,}) {final _that = this;
 switch (_that) {
 case Init():
 return init();case QueryChanged():
-return queryChanged(_that.query);case Refresh():
-return refresh();}
+return queryChanged(_that.query);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -164,12 +159,11 @@ return refresh();}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( String query)?  queryChanged,TResult? Function()?  refresh,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  init,TResult? Function( String query)?  queryChanged,}) {final _that = this;
 switch (_that) {
 case Init() when init != null:
 return init();case QueryChanged() when queryChanged != null:
-return queryChanged(_that.query);case Refresh() when refresh != null:
-return refresh();case _:
+return queryChanged(_that.query);case _:
   return null;
 
 }
@@ -274,37 +268,5 @@ as String,
 
 
 }
-
-/// @nodoc
-
-
-class Refresh extends AuthorsViewEvent {
-  const Refresh(): super._();
-  
-
-
-
-
-
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Refresh);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString() {
-  return 'AuthorsViewEvent.refresh()';
-}
-
-
-}
-
-
-
 
 // dart format on

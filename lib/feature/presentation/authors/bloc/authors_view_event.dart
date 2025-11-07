@@ -9,6 +9,4 @@ sealed class AuthorsViewEvent with _$AuthorsViewEvent {
   const factory AuthorsViewEvent.init() = Init;
 
   const factory AuthorsViewEvent.queryChanged(String query) = QueryChanged;
-
-  const factory AuthorsViewEvent.refresh() = Refresh;
 }

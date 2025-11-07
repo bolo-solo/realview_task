@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../../../core/consts/name_consts.dart';
 import '../../../../router/app_routes.dart';
 import '../bloc/authors_view_bloc.dart';
 import '../bloc/authors_view_event.dart';
@@ -24,7 +25,7 @@ class AuthorsView extends StatelessWidget {
                 AuthorsViewEvent.queryChanged(query),
               );
             },
-            initialValue: 'Flutter',
+            initialValue: NameConsts.initialInputValue,
           ),
           Expanded(
             child: state.when(
@@ -39,7 +40,7 @@ class AuthorsView extends StatelessWidget {
                   },
                 ),
               ),
-              error: (message) => Center(child: Text('Error: $message')),
+              loadingError: (message) => Center(child: Text('Error: $message')),
             ),
           ),
         ],

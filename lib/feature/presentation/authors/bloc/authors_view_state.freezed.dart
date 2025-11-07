@@ -55,14 +55,14 @@ extension AuthorsViewStatePatterns on AuthorsViewState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Initial value)?  initial,TResult Function( Loading value)?  loading,TResult Function( Loaded value)?  loaded,TResult Function( Error value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( Initial value)?  initial,TResult Function( Loading value)?  loading,TResult Function( Loaded value)?  loaded,TResult Function( LoadingError value)?  loadingError,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case Initial() when initial != null:
 return initial(_that);case Loading() when loading != null:
 return loading(_that);case Loaded() when loaded != null:
-return loaded(_that);case Error() when error != null:
-return error(_that);case _:
+return loaded(_that);case LoadingError() when loadingError != null:
+return loadingError(_that);case _:
   return orElse();
 
 }
@@ -80,14 +80,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Initial value)  initial,required TResult Function( Loading value)  loading,required TResult Function( Loaded value)  loaded,required TResult Function( Error value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( Initial value)  initial,required TResult Function( Loading value)  loading,required TResult Function( Loaded value)  loaded,required TResult Function( LoadingError value)  loadingError,}){
 final _that = this;
 switch (_that) {
 case Initial():
 return initial(_that);case Loading():
 return loading(_that);case Loaded():
-return loaded(_that);case Error():
-return error(_that);}
+return loaded(_that);case LoadingError():
+return loadingError(_that);}
 }
 /// A variant of `map` that fallback to returning `null`.
 ///
@@ -101,14 +101,14 @@ return error(_that);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Initial value)?  initial,TResult? Function( Loading value)?  loading,TResult? Function( Loaded value)?  loaded,TResult? Function( Error value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( Initial value)?  initial,TResult? Function( Loading value)?  loading,TResult? Function( Loaded value)?  loaded,TResult? Function( LoadingError value)?  loadingError,}){
 final _that = this;
 switch (_that) {
 case Initial() when initial != null:
 return initial(_that);case Loading() when loading != null:
 return loading(_that);case Loaded() when loaded != null:
-return loaded(_that);case Error() when error != null:
-return error(_that);case _:
+return loaded(_that);case LoadingError() when loadingError != null:
+return loadingError(_that);case _:
   return null;
 
 }
@@ -125,13 +125,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<Author> authors,  String query)?  loaded,TResult Function( String message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<Author> authors,  String query)?  loaded,TResult Function( String message)?  loadingError,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case Initial() when initial != null:
 return initial();case Loading() when loading != null:
 return loading();case Loaded() when loaded != null:
-return loaded(_that.authors,_that.query);case Error() when error != null:
-return error(_that.message);case _:
+return loaded(_that.authors,_that.query);case LoadingError() when loadingError != null:
+return loadingError(_that.message);case _:
   return orElse();
 
 }
@@ -149,13 +149,13 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<Author> authors,  String query)  loaded,required TResult Function( String message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<Author> authors,  String query)  loaded,required TResult Function( String message)  loadingError,}) {final _that = this;
 switch (_that) {
 case Initial():
 return initial();case Loading():
 return loading();case Loaded():
-return loaded(_that.authors,_that.query);case Error():
-return error(_that.message);}
+return loaded(_that.authors,_that.query);case LoadingError():
+return loadingError(_that.message);}
 }
 /// A variant of `when` that fallback to returning `null`
 ///
@@ -169,13 +169,13 @@ return error(_that.message);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<Author> authors,  String query)?  loaded,TResult? Function( String message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<Author> authors,  String query)?  loaded,TResult? Function( String message)?  loadingError,}) {final _that = this;
 switch (_that) {
 case Initial() when initial != null:
 return initial();case Loading() when loading != null:
 return loading();case Loaded() when loaded != null:
-return loaded(_that.authors,_that.query);case Error() when error != null:
-return error(_that.message);case _:
+return loaded(_that.authors,_that.query);case LoadingError() when loadingError != null:
+return loadingError(_that.message);case _:
   return null;
 
 }
@@ -324,8 +324,8 @@ as String,
 /// @nodoc
 
 
-class Error extends AuthorsViewState {
-  const Error(this.message): super._();
+class LoadingError extends AuthorsViewState {
+  const LoadingError(this.message): super._();
   
 
  final  String message;
@@ -334,13 +334,13 @@ class Error extends AuthorsViewState {
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
 @pragma('vm:prefer-inline')
-$ErrorCopyWith<Error> get copyWith => _$ErrorCopyWithImpl<Error>(this, _$identity);
+$LoadingErrorCopyWith<LoadingError> get copyWith => _$LoadingErrorCopyWithImpl<LoadingError>(this, _$identity);
 
 
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Error&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoadingError&&(identical(other.message, message) || other.message == message));
 }
 
 
@@ -349,15 +349,15 @@ int get hashCode => Object.hash(runtimeType,message);
 
 @override
 String toString() {
-  return 'AuthorsViewState.error(message: $message)';
+  return 'AuthorsViewState.loadingError(message: $message)';
 }
 
 
 }
 
 /// @nodoc
-abstract mixin class $ErrorCopyWith<$Res> implements $AuthorsViewStateCopyWith<$Res> {
-  factory $ErrorCopyWith(Error value, $Res Function(Error) _then) = _$ErrorCopyWithImpl;
+abstract mixin class $LoadingErrorCopyWith<$Res> implements $AuthorsViewStateCopyWith<$Res> {
+  factory $LoadingErrorCopyWith(LoadingError value, $Res Function(LoadingError) _then) = _$LoadingErrorCopyWithImpl;
 @useResult
 $Res call({
  String message
@@ -368,17 +368,17 @@ $Res call({
 
 }
 /// @nodoc
-class _$ErrorCopyWithImpl<$Res>
-    implements $ErrorCopyWith<$Res> {
-  _$ErrorCopyWithImpl(this._self, this._then);
+class _$LoadingErrorCopyWithImpl<$Res>
+    implements $LoadingErrorCopyWith<$Res> {
+  _$LoadingErrorCopyWithImpl(this._self, this._then);
 
-  final Error _self;
-  final $Res Function(Error) _then;
+  final LoadingError _self;
+  final $Res Function(LoadingError) _then;
 
 /// Create a copy of AuthorsViewState
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? message = null,}) {
-  return _then(Error(
+  return _then(LoadingError(
 null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String,
   ));
